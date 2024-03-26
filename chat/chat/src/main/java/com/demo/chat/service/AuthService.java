@@ -18,11 +18,8 @@ import java.util.NoSuchElementException;
 public class AuthService {
     private final JwtUtils jwtUtils;
     private final UserService userService;
-/*    public ResponseEntity<?>  createAuthToken(JwtRequestDto request) {
 
-    }*/
-
-    /*public ResponseEntity<?> createNewUser(RegistrationDto request){
+    public ResponseEntity<?> createNewUser(RegistrationDto request) {
         if(!request.getPassword().equals(request.getPasswordConfirmation()))
             return ResponseEntity.badRequest().body(new AppError("Password and password confirmation are not equals", HttpStatus.BAD_REQUEST.value()));
         if (userService.findByUsername(request.getUsername()).isPresent())
@@ -31,7 +28,7 @@ public class AuthService {
         return ResponseEntity.ok(new UserDto(user.getId(),
                 user.getUsername(),
                 user.getEmail()));
-    }*/
+    }
 
     public ResponseEntity<?> login(LoginDto request){
         User loginUser = userService.findByUsername(request.getUsername())
@@ -42,4 +39,6 @@ public class AuthService {
         String token = jwtUtils.generateToken(details);
         return ResponseEntity.ok(new JwtResponseDto(token));
     }
+
+
 }

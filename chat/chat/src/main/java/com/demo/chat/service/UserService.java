@@ -41,11 +41,11 @@ public class UserService implements UserDetailsService {
         );
     }
 
-/*    public ResponseEntity<?> createNewUser(RegistrationDto request) {
+    public ResponseEntity<?> createNewUser(RegistrationDto request) {
         User user = new User();
         user.setUsername(request.getUsername());
-        user.setPassword(encoder.encode(request.getPassword()));
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setEmail(request.getEmail());
-        // roles
-    }*/
+
+    }
 }

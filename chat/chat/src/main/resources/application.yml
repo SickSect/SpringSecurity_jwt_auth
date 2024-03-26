@@ -4,14 +4,21 @@ jwt:
   secret: 984hg493gh0439rthr0429uruj2309yh937gc763fe87t3f89723gf
   lifetime: 30m
 spring:
+  flyway:
+    user: sa
+    password:
+    schemas: test
+    url: jdbc:h2:file:./apper
+    locations: filesystem:db/migration
   main:
     allow-circular-references: true
   datasource:
+    generate-unique-name: false
     hikari:
       username: sa
       password:
       driver-class-name: org.h2.Driver
-      url: jdbc:h2:file:./users;MODE=PostgreSQL
+      url: jdbc:h2:file:./apper;INIT=RUNSCRIPT FROM 'src/main/resources/db/migration/V1_init.sql';
   jpa:
     show-sql: true
     properties:
@@ -20,5 +27,5 @@ spring:
   h2:
     console:
       settings:
-        web-allow-others: false
+        web-allow-others: true
       enabled: true
