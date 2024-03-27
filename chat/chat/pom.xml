@@ -41,7 +41,6 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -119,6 +118,19 @@
 					</excludes>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-core</artifactId>
+				<configuration>
+					<user>saa</user>
+					<password>saa</password>
+					<schemas>
+						<schema>test-chat</schema>
+					</schemas>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 
