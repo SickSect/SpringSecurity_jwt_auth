@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
@@ -18,6 +19,7 @@ import java.util.NoSuchElementException;
 public class AuthService {
     private final JwtUtils jwtUtils;
     private final UserService userService;
+    private final BCryptPasswordEncoder encoder;
 
     public ResponseEntity<?> createNewUser(RegistrationDto request) {
         if(!request.getPassword().equals(request.getPasswordConfirmation()))
@@ -33,7 +35,7 @@ public class AuthService {
     public ResponseEntity<?> login(LoginDto request){
         User loginUser = userService.findByUsername(request.getUsername())
                 .orElseThrow( () -> new UsernameNotFoundException("User does not exist"));
-        if (!loginUser.getPassword().equals(request.getPassword()))
+        if (!encoder.matches(request.getPassword(), loginUser.getPassword()))
             return ResponseEntity.badRequest().body(new AppError("Wrong password", HttpStatus.BAD_REQUEST.value()));
         UserDetails details = userService.loadUserByUsername(request.getUsername());
         String token = jwtUtils.generateToken(details);
