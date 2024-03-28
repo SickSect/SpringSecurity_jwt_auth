@@ -42,9 +42,6 @@ public class SecurityConfig {
                                 .requestMatchers("/editor").hasRole("EDITOR")
                                 .requestMatchers("/author").hasRole("AUTHOR")
                                 .anyRequest().authenticated()
-                            /*.requestMatchers("/secured").authenticated()
-                        .requestMatchers("/admin").hasRole("/admin")
-                            .anyRequest().permitAll()*/
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
