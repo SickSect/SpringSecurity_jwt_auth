@@ -7,9 +7,6 @@ spring:
   flyway:
     user: sa
     password:
-    #schemas: test
-    #url: jdbc:h2:mem:chat-app
-    #locations: filesystem:db/migration
     baseline-on-migrate: true
     enabled: true
     baseline-description: "init"

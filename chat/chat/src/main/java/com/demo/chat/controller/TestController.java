@@ -16,4 +16,24 @@ public class TestController {
     public String unsecured(){
         return "unsecured";
     }
+
+    @GetMapping("/reader")
+    public String reader(){
+        return "reader";
+    }
+
+    @GetMapping("/editor")
+    public String editor(){
+        return "editor";
+    }
+
+    @GetMapping("/author")
+    public String author(){
+        return "author";
+    }
+
+    @GetMapping("/admin")
+    public String admin(){
+        return "admin";
+    }
 }

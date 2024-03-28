@@ -5,7 +5,6 @@ import com.demo.chat.model.User;
 import com.demo.chat.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,6 +21,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class UserService implements UserDetailsService {
     private final UserRepo userRepo;
+    private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
 
     public Optional<User> findByUsername(String username) {
@@ -46,6 +46,7 @@ public class UserService implements UserDetailsService {
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setEmail(request.getEmail());
+        user.setRoles(List.of(roleService.findRoleByName("READER")));
         userRepo.save(user);
         return user;
     }
